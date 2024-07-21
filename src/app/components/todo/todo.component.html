@@ -1,0 +1,47 @@
+<div
+  class="todo"
+  [class.completed]="todo.completed"
+>
+  <label class="todo__status-label">
+    <input
+      type="checkbox"
+      class="todo__status"
+      [checked]="todo.completed"
+      (change)="toggle.emit()"
+    />
+  </label>
+
+  <form *ngIf="editing; else titleBlock" (ngSubmit)="save()">
+    <input
+      #titleField
+      type="text"
+      class="todo__title-field"
+      name="title"
+      placeholder="Empty todo will be deleted"
+      [(ngModel)]="title"
+      (keyup.escape)="editing = false"
+      (blur)="save()"
+      />
+  </form>
+
+  <ng-template #titleBlock>
+    <span
+      class="todo__title"
+      (dblclick)="edit()"
+      >
+      {{ todo.title | lowercase }}</span>
+
+    <button
+      class="todo__remove"
+      (click)="delete.emit()"
+
+    >
+      x
+    </button>
+  </ng-template>
+
+  <div class="modal overlay" [class.is-active]="false">
+    <div class="modal-background has-background-with-ter"></div>
+    <div class="loader"></div>
+  </div>
+</div>

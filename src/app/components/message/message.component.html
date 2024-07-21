@@ -1,0 +1,17 @@
+<article
+  class="message is-danger"
+  [class.message--hidden]="hidden"
+  >
+  <div class="message-header">
+    <p>{{ title }}</p>
+
+    <button
+      class="delete"
+      (click)="hidden = true"
+      ></button>
+  </div>
+
+  <div class="message-body">
+    {{ message }}
+  </div>
+</article>
